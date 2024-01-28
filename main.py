@@ -1,8 +1,13 @@
 from flask import Flask
 from flask_restful import Api, Resource, reqparse, abort
+from flask_sqlalchemy import SQLAlchemy
+
 
 app = Flask(__name__)
 api = Api(app)
+app.config['SQALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+db = SQLAlchemy(app)
+
 
 video_put_args = reqparse.RequestParser()
 
