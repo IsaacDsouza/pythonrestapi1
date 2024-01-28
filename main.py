@@ -1,15 +1,30 @@
 from flask import Flask
-from flask_restful import Api, Resource
+from flask_restful import Api, Resource, reqparse
 
 app = Flask(__name__)
 api = Api(app)
 
-class HelloWorld(Resource):
-    def get(self):
-        return {"data" :"Hello World"}
+video_put_args = reqparse.RequestParser()
+
+video_put_args.add_argument("name", type=str, help="Name of the video")
+video_put_args.add_argument("name", type=str, help="Name of the video")
+video_put_args.add_argument("name", type=str, help="Name of the video")
+video_put_args.add_argument("name", type=str, help="Name of the video")
 
 
-api.add_resource(HelloWorld, "/helloworld")
+videos = {}
+
+
+class Video(Resource):
+    def get(self,video_id):
+        return videos[video_id]
+    
+    def put(self, video_id):
+        return {}
+        
+
+
+api.add_resource(Video, "/video/<int:video_id>")
 
 
 
